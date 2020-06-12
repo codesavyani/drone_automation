@@ -14,38 +14,60 @@ Controller for drone automation using MAVROS
 
 ## Usage 
 
-For testing waypoint.py:
+### Default PX4 Empty World
 
-```python
+To test in the default px4 empty world first run:
+```bash
 $ roslaunch px4 mavros_posix_sitl.launch
+```
+
+Then in a seperate terminal:
+```bash
 $ python waypoint.py
 ```
-***Note:*** *This should be done in seperate terminals* 
 
-For testing iris_fpv_cam or iris_rplidar:
-- Add both launch files to Firmware/launch directory
-- Add the modified_warehouse.world file to Firmware/Tools/sitl_gazebo/worlds directory
-- Add the tf_node.sh script to the Firmware directory
+### Warehouse world with lidar or camera 
 
-Now,you can simply do: 
+To use the either the `iris_fpv_cam` model or `iris_rplidar` model, follow this procedure - 
 
-```python
+***Note:*** You will need to replace `<path_to_Firmware>` with the approproate path in the commands below.
+
+1. Copy the required launch files into the px4 package:
+```back
+$ cp launch/* <path_to_Firmware>/launch/
+```
+
+2. Copy the required world files into px4 package:
+```bash
+$ cp world/* <path_to_Firmware>/Tools/sitl_gazebo/worlds/
+```
+
+3. Copy the required rviz files into px4 package:
+```bash
+$ mkdir -p <path_to_Firmware>/Tools/sitl_gazebo/rviz/
+$ cp rviz/* <path_to_Firmware>/Tools/sitl_gazebo/rviz/
+```
+
+4. Launch the desired configuration:
+```bash
 $ roslaunch px4 iris_fpv_cam.launch
 ```
 or
-```python
+```bash
 $ roslaunch px4 iris_rplidar.launch
 ```
-Once both Gazebo and Rviz have been launched, you can run(in a new terminal):
-```python
+
+5. Run the waypoint controller:
+```bash
 $ python waypoint.py
 ```
-and check whether the feeds are being updated in Rviz
+
+The camera / lidar topics should be displayed in RViz
 
 
 ## TODO
 - [X] Add waypoint controller
-- [ ] Use `setpoint_velocity` with proportional control
+- [X] Use `setpoint_velocity` with proportional control
 - [ ] Incorporate obstacle detection using LIDAR / Camera
 
 ## Resources
