@@ -50,11 +50,11 @@ $ cp rviz/* <path_to_Firmware>/Tools/sitl_gazebo/rviz/
 
 4. Launch the desired configuration:
 ```bash
-$ roslaunch px4 iris_fpv_cam.launch
+$ roslaunch px4 test_iris_fpv_cam.launch
 ```
 or
 ```bash
-$ roslaunch px4 iris_rplidar.launch
+$ roslaunch px4 test_iris_rplidar.launch
 ```
 
 5. Run the waypoint controller:
